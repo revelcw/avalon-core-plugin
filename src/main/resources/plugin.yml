@@ -1,0 +1,7 @@
+name: AvalonCore
+version: '${project.version}'
+main: com.revelcw.avaloncore.AvalonCore
+api-version: 1.19
+authors: [ revelcw ]
+description: The feature plugin for The Avalon Project.
+website: revelcw.com
