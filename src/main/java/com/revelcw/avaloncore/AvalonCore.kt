@@ -3,15 +3,17 @@ package com.revelcw.avaloncore
 import co.aikar.commands.PaperCommandManager
 import com.mongodb.MongoClient
 import com.mongodb.MongoClientURI
-import com.mongodb.client.MongoCollection
-import com.revelcw.avaloncore.utils.ChatFormat
-import org.bson.Document
+import com.revelcw.avaloncore.commands.LinkCommand
+import com.revelcw.avaloncore.managers.DatastoreManager
 import org.bukkit.plugin.java.JavaPlugin
 
 
 class AvalonCore : JavaPlugin() {
 
   override fun onEnable() {
+    val mongoClient =
+      MongoClient(MongoClientURI("mongodb+srv://bot:5yl1o5JTMV2FA7GV@cluster0.pux9z.mongodb.net/?retryWrites=true&w=majority"))
+    val datastore = DatastoreManager(mongoClient)
     val manager = PaperCommandManager(this)
     manager.registerCommand(LinkCommand())
 //        val player = players.find(and(eq("linkCode", "J19-62H"), not(exists("minecraftUuid")))).first()
@@ -33,9 +35,6 @@ class AvalonCore : JavaPlugin() {
 
   companion object {
     //    public static String prefix = "[" + ChatColor.RED + "A" + ChatColor.YELLOW + ":" + ChatColor.LIGHT_PURPLE + "C" + ChatColor
-    private val mongoClient =
-      MongoClient(MongoClientURI("mongodb+srv://bot:5yl1o5JTMV2FA7GV@cluster0.pux9z.mongodb.net/?retryWrites=true&w=majority"))
-    private val database = mongoClient.getDatabase("avalon-project")
-    val players: MongoCollection<Document> = database.getCollection("players")
+
   }
 }

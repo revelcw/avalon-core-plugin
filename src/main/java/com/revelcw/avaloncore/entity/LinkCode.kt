@@ -9,7 +9,7 @@ import kotlin.math.pow
  *
  * @param code The code
  */
-data class LinkCode(var code: String) {
+data class LinkCode(private val code: String) {
   /**
    * The LinkCode without dashes or spaces. Use this for storing code.
    */

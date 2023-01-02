@@ -1,6 +1,6 @@
 package com.revelcw.avaloncore.utils
 
-import com.revelcw.avaloncore.AvalonCore
+import org.bukkit.ChatColor
 import org.bukkit.command.CommandSender
 
 object ChatFormat {
@@ -35,9 +35,9 @@ object ChatFormat {
     }
   }
 
-  var PREFIX = convert("&yellow[&redA&yellow:&light_purpleC&yellow]&r ")
+  val PREFIX = convert("&yellow[&redA&yellow:&light_purpleC&yellow]&r ")
 
-  fun convert(unformattedString: String): String? {
+  fun convert(unformattedString: String): String {
     var formattedString = unformattedString
     for ((key, value) in replaceMap) {
       formattedString = formattedString.replace(key, value)
@@ -45,8 +45,16 @@ object ChatFormat {
     return formattedString
   }
 
-
-  fun sendMessage(sender: CommandSender, message: String) {
+  fun sendInfo(sender: CommandSender, message: String) {
     sender.sendMessage(PREFIX + convert(message))
+  }
+  fun sendSuccess(sender: CommandSender, message: String) {
+    sender.sendMessage(PREFIX + ChatColor.DARK_GREEN + convert(message))
+  }
+  fun sendWarning(sender: CommandSender, message: String) {
+    sender.sendMessage(PREFIX + ChatColor.YELLOW + convert(message))
+  }
+  fun sendError(sender: CommandSender, message: String) {
+    sender.sendMessage(PREFIX + ChatColor.RED + convert(message))
   }
 }
